@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.uas.controller.HomeController"
+            prefWidth="600" prefHeight="400" style="-fx-background-color: linear-gradient(to bottom right, #74ebd5, #ACB6E5);">
+    <children>
+        <VBox alignment="CENTER" spacing="20.0" layoutX="150" layoutY="100" prefWidth="300">
+            <Label text="ExploreSumut"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #ffffff;" />
+            <Label text="Selamat datang di aplikasi wisata Sumatera Utara!"
+                   wrapText="true"
+                   style="-fx-font-size: 14px; -fx-text-fill: #f0f0f0;"/>
+
+            <HBox alignment="CENTER" spacing="15">
+                <Button text="Login" onAction="#goToLogin"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 16;" />
+                <Button text="Register" onAction="#goToRegister"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 16;" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>
+
+
