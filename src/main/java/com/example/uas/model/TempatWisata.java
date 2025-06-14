@@ -1,23 +1,57 @@
 package com.example.uas.model;
 
-public class TempatWisata {
-    private String nama;
-    private String kategori;
-    private String lokasi;
-    private String deskripsi;
-    private String gambar;
+import java.util.List;
 
-    public TempatWisata(String nama, String kategori, String lokasi, String deskripsi, String gambar) {
-        this.nama = nama;
-        this.kategori = kategori;
-        this.lokasi = lokasi;
-        this.deskripsi = deskripsi;
-        this.gambar = gambar;
+/**
+ * Model class for tourist destination (Wisata).
+ */
+public class TempatWisata {
+    private int id;
+    private String name;
+    private String category;
+    private String location;
+    private String shortDescription;
+    private String fullDescription;
+    private List<String> imageUrls; // Image URLS for gallery
+
+    public TempatWisata() {}
+
+    public TempatWisata(int id, String name, String category, String location,
+                  String shortDescription, String fullDescription, List<String> imageUrls) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.location = location;
+        this.shortDescription = shortDescription;
+        this.fullDescription = fullDescription;
+        this.imageUrls = imageUrls;
     }
 
-    // Getter & Setter
-    public String getNama() { return nama; }
-    public void setNama(String nama) { this.nama = nama; }
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    // Lanjutkan untuk semua atribut
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
+
+    public String getShortDescription() { return shortDescription; }
+    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
+
+    public String getFullDescription() { return fullDescription; }
+    public void setFullDescription(String fullDescription) { this.fullDescription = fullDescription; }
+
+    public List<String> getImageUrls() { return imageUrls; }
+    public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
+
+    @Override
+    public String toString() {
+        return String.format("%s (%s) - %s", name, category, location);
+    }
 }
+
