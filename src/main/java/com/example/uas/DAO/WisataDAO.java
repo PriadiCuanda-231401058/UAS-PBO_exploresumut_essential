@@ -1,7 +1,10 @@
 package com.example.uas.DAO;
 
-import com.example.uas.database.DBConnection;
 import com.example.uas.model.TempatWisata;
+import com.example.uas.model.WisataAlam;
+import com.example.uas.model.WisataBudaya;
+import com.example.uas.model.WisataKuliner;
+import com.example.uas.database.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,38 +24,33 @@ public class WisataDAO {
      * Get all wisata entries sorted descending by id (for newest first).
      */
     public List<TempatWisata> getAllWisata() {
-        List<TempatWisata> result = new ArrayList<>();
-
-        String sql = "SELECT id, name, category, location, short_desc, full_desc, image_urls FROM wisata ORDER BY id DESC";
+        List<TempatWisata> list = new ArrayList<>();
+        String sql = "SELECT id, nama, kategori, lokasi, deskripsi, gambar FROM tempat_wisata ORDER BY id DESC";
 
         try (Connection conn = DBConnection.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                TempatWisata w = new TempatWisata();
-                w.setId(rs.getInt("id"));
-                w.setName(rs.getString("name"));
-                w.setCategory(rs.getString("category"));
-                w.setLocation(rs.getString("location"));
-                w.setShortDescription(rs.getString("short_desc"));
-                w.setFullDescription(rs.getString("full_desc"));
-
-                // Assuming image_urls stored as comma separated string
-                String imgStr = rs.getString("image_urls");
+                int id = rs.getInt("id");
+                String name = rs.getString("nama");
+                String category = rs.getString("kategori");
+                String location = rs.getString("lokasi");
+                String description = rs.getString("deskripsi");
+                String imgStr = rs.getString("gambar");
                 List<String> images = (imgStr == null || imgStr.isEmpty())
                         ? new ArrayList<>()
                         : Arrays.asList(imgStr.split(","));
-                w.setImageUrls(images);
-
-                result.add(w);
+                TempatWisata wisata;
+                wisata = new TempatWisata(id, name, category, location, description, images);
+                list.add(wisata);
             }
 
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Failed to get all wisata", e);
+            e.printStackTrace();
         }
 
-        return result;
+        return list;
     }
 
     /**
@@ -61,7 +59,7 @@ public class WisataDAO {
      */
     public List<TempatWisata> searchWisata(String nameFilter, String categoryFilter, String locationFilter) {
         List<TempatWisata> result = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT id, name, category, location, short_desc, full_desc, image_urls FROM wisata WHERE 1=1 ");
+        StringBuilder sql = new StringBuilder("SELECT id, nama, kategori, lokasi, deskripsi, gambar FROM tempat_wisata WHERE 1=1 ");
         List<Object> params = new ArrayList<>();
 
         if (nameFilter != null && !nameFilter.isBlank()) {
@@ -89,13 +87,12 @@ public class WisataDAO {
                 while (rs.next()) {
                     TempatWisata w = new TempatWisata();
                     w.setId(rs.getInt("id"));
-                    w.setName(rs.getString("name"));
-                    w.setCategory(rs.getString("category"));
-                    w.setLocation(rs.getString("location"));
-                    w.setShortDescription(rs.getString("short_desc"));
-                    w.setFullDescription(rs.getString("full_desc"));
+                    w.setName(rs.getString("nama"));
+                    w.setCategory(rs.getString("kategori"));
+                    w.setLocation(rs.getString("lokasi"));
+                    w.setDescription(rs.getString("deskripsi"));
 
-                    String imgStr = rs.getString("image_urls");
+                    String imgStr = rs.getString("gambar");
                     List<String> images = (imgStr == null || imgStr.isEmpty())
                             ? new ArrayList<>()
                             : Arrays.asList(imgStr.split(","));
@@ -115,32 +112,54 @@ public class WisataDAO {
      */
     public TempatWisata getWisataById(int id) {
         TempatWisata w = null;
-        String sql = "SELECT id, name, category, location, short_desc, full_desc, image_urls FROM wisata WHERE id = ?";
+        String sql = "SELECT id, nama, kategori, lokasi, deskripsi, gambar, info_tambahan FROM tempat_wisata WHERE id = ?";
 
         try (Connection conn = DBConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()) {
-                    w = new TempatWisata();
+                    String category = rs.getString("kategori");
+                    String info = rs.getString("info_tambahan");
+                    if (category != null) {
+                        switch (category.toLowerCase()) {
+                            case "alam":
+                                w = new WisataAlam(info);
+                                break;
+                            case "budaya":
+                                w = new WisataBudaya(info);
+                                break;
+                            case "kuliner":
+                                w = new WisataKuliner(info);
+                                break;
+                            default:
+                                w = new TempatWisata();
+                        }
+                    } else {
+                        w = new TempatWisata();
+                    }
                     w.setId(rs.getInt("id"));
-                    w.setName(rs.getString("name"));
-                    w.setCategory(rs.getString("category"));
-                    w.setLocation(rs.getString("location"));
-                    w.setShortDescription(rs.getString("short_desc"));
-                    w.setFullDescription(rs.getString("full_desc"));
+                    w.setName(rs.getString("nama"));
+                    w.setCategory(category);
+                    w.setLocation(rs.getString("lokasi"));
+                    w.setDescription(rs.getString("deskripsi"));
 
-                    String imgStr = rs.getString("image_urls");
+                    // Assuming image_urls stored as comma separated string
+                    String imgStr = rs.getString("gambar");
                     List<String> images = (imgStr == null || imgStr.isEmpty())
                             ? new ArrayList<>()
-                            : Arrays.asList(imgStr.split(","));
+                            : List.of(imgStr.split(","));
                     w.setImageUrls(images);
+
                 }
             }
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Failed to get wisata by id", e);
         }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return w;
     }
 
@@ -149,14 +168,14 @@ public class WisataDAO {
      */
     public List<String> getAllCategories() {
         List<String> categories = new ArrayList<>();
-        String sql = "SELECT DISTINCT category FROM wisata ORDER BY category";
+        String sql = "SELECT DISTINCT kategori FROM tempat_wisata ORDER BY kategori";
 
         try (Connection conn = DBConnection.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                categories.add(rs.getString("category"));
+                categories.add(rs.getString("kategori"));
             }
 
         } catch (SQLException e) {

@@ -9,8 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
 import java.util.List;
 
@@ -23,8 +21,9 @@ public class DetailController {
     @FXML private Label nameLabel;
     @FXML private Label categoryLabel;
     @FXML private Label locationLabel;
+    @FXML private Label infoLabel;
     @FXML private TextArea fullDescriptionArea;
-    @FXML private HBox imageGallery;
+    @FXML private ImageView imageGallery;
 
     @FXML private ListView<Ulasan> reviewListView;
     @FXML private TextField nameField;
@@ -58,15 +57,16 @@ public class DetailController {
             nameLabel.setText(wisata.getName());
             categoryLabel.setText("Kategori: " + wisata.getCategory());
             locationLabel.setText("Lokasi: " + wisata.getLocation());
-            fullDescriptionArea.setText(wisata.getFullDescription());
 
-            imageGallery.getChildren().clear();
+            if(wisata.tampilkanInfo() != null) infoLabel.setText(wisata.tampilkanInfo());
+
+            fullDescriptionArea.setText(wisata.getDescription());
+
             if (wisata.getImageUrls() != null) {
                 for (String url : wisata.getImageUrls()) {
                     if (url != null && !url.isBlank()) {
-                        ImageView imageView = new ImageView(new Image(url.trim(), 150, 100, true, true));
-                        imageView.setStyle("-fx-effect: dropshadow(gaussian, #999, 3, 0.3, 1, 1);");
-                        imageGallery.getChildren().add(imageView);
+                        Image imageView = new Image(url.trim(), 150, 100, true, true);
+                        imageGallery.setImage(imageView);
                     }
                 }
             }

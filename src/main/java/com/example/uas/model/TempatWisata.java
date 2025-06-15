@@ -6,24 +6,22 @@ import java.util.List;
  * Model class for tourist destination (Wisata).
  */
 public class TempatWisata {
-    private int id;
-    private String name;
-    private String category;
-    private String location;
-    private String shortDescription;
-    private String fullDescription;
-    private List<String> imageUrls; // Image URLS for gallery
+    protected int id;
+    protected String name;
+    protected String category;
+    protected String location;
+    protected String Description;
+    protected List<String> imageUrls; // Image URLS for gallery
 
     public TempatWisata() {}
 
     public TempatWisata(int id, String name, String category, String location,
-                  String shortDescription, String fullDescription, List<String> imageUrls) {
+                  String Description, List<String> imageUrls) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.location = location;
-        this.shortDescription = shortDescription;
-        this.fullDescription = fullDescription;
+        this.Description = Description;
         this.imageUrls = imageUrls;
     }
 
@@ -40,11 +38,8 @@ public class TempatWisata {
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
 
-    public String getShortDescription() { return shortDescription; }
-    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
-
-    public String getFullDescription() { return fullDescription; }
-    public void setFullDescription(String fullDescription) { this.fullDescription = fullDescription; }
+    public String getDescription() { return Description; }
+    public void setDescription(String Description) { this.Description = Description; }
 
     public List<String> getImageUrls() { return imageUrls; }
     public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
@@ -52,6 +47,9 @@ public class TempatWisata {
     @Override
     public String toString() {
         return String.format("%s (%s) - %s", name, category, location);
+    }
+    public String tampilkanInfo(){
+        return null;
     }
 }
 
