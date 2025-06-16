@@ -70,4 +70,20 @@ public class UlasanDAO {
             return false;
         }
     }
+    public double getAverageRatingByWisataId(int wisataId) {
+        double total = 0;
+        int count = 0;
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement stmt = conn.prepareStatement("SELECT rating FROM review WHERE wisata_id = ?")) {
+            stmt.setInt(1, wisataId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                total += rs.getInt("rating");
+                count++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count == 0 ? 0 : total / count;
+    }
 }
