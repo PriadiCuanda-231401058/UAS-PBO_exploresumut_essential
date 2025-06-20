@@ -8,8 +8,8 @@ public class DBConnection {
                                         "?useSSL=true" +
                                         "&requireSSL=true" +
                                         "&verifyServerCertificate=true" +
-                                        "&trustCertificateKeyStoreUrl=file:D:\\sem 4\\LAB PBO\\UAS\\src\\main\\java\\com\\example\\uas\\keystore.jks" +
-                                        "&trustCertificateKeyStorePassword=p.b.o.";
+                                        "&trustCertificateKeyStoreUrl=file:D:\\keystore.jks" +
+                                        "&trustCertificateKeyStorePassword=qwerty";
     private static final String USER = "avnadmin";
     private static final String PASS = "AVNS_LXE4QR_L36QEuXPf9J_";
 

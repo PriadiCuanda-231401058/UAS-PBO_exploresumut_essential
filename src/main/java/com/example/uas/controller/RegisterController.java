@@ -3,22 +3,35 @@ package com.example.uas.controller;
 //package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
 import com.example.uas.database.DBConnection;
+import javafx.stage.Stage;
 
 import java.sql.*;
 
 public class RegisterController {
+    Function helper = new Function();
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
+
+    private boolean isValidPassword(String password) {
+        return password.length() >= 8 &&
+                password.matches(".*[A-Z].*") &&     // ada huruf besar
+                password.matches(".*[a-z].*") &&     // ada huruf kecil
+                password.matches(".*\\d.*") &&       // ada angka
+                password.matches(".*[^a-zA-Z0-9].*"); // ada simbol
+    }
 
     @FXML
     private void handleRegister() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+
+        if (!isValidPassword(password)) {
+            showAlert("Gagal", "Password harus minimal 8 karakter dan mengandung huruf besar, huruf kecil, angka, dan simbol.");
+            return;
+        }
 
         try (Connection conn = DBConnection.connect();) {
             String query = "INSERT INTO users(username, password) VALUES (?, ?)";
@@ -28,7 +41,7 @@ public class RegisterController {
             stmt.executeUpdate();
 
             showAlert("Sukses", "Registrasi berhasil!");
-            goToLogin();
+            helper.moveTo(usernameField, "/com/example/uas/view/login.fxml");
 
         } catch (SQLIntegrityConstraintViolationException e) {
             showAlert("Gagal", "Username sudah digunakan.");
@@ -41,10 +54,7 @@ public class RegisterController {
     @FXML
     private void goToLogin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(scene);
+            helper.moveTo(usernameField, "/com/example/uas/view/login.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }
