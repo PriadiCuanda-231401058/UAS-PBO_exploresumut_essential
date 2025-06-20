@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import com.example.uas.database.DBConnection;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
@@ -34,10 +35,11 @@ public class RegisterController {
         }
 
         try (Connection conn = DBConnection.connect();) {
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             String query = "INSERT INTO users(username, password) VALUES (?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
-            stmt.setString(2, password); // Belum hash
+            stmt.setString(2, hashedPassword);
             stmt.executeUpdate();
 
             showAlert("Sukses", "Registrasi berhasil!");
