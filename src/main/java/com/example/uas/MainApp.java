@@ -19,7 +19,8 @@ public class MainApp extends Application {
         stage.setTitle("ExploreSumut");
         stage.setScene(scene);
         // Cara 1: Fullscreen (tanpa border, taskbar hilang)
-        stage.setFullScreen(true);
+//        stage.setFullScreen(true);
+        stage.setMaximized(true);
 
         // Cara 2: Maximized (seperti mode biasa tapi layar penuh)
 //        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
