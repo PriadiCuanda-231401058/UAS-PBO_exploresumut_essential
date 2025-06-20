@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.uas.controller.LoginController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uas.controller.LoginController">
 
-    <Label text="Login" />
-    <TextField fx:id="usernameField" promptText="Username" />
-    <PasswordField fx:id="passwordField" promptText="Password" />
-    <Button text="Login" onAction="#handleLogin"/>
-    <Button text="Register" onAction="#goToRegister"/>
+    <Label layoutX="285.0" layoutY="87.0" text="Login" />
+    <TextField fx:id="usernameField" layoutX="225.0" layoutY="119.0" promptText="Username" />
+    <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="161.0" promptText="Password" />
+    <Button layoutX="328.0" layoutY="212.0" onAction="#handleLogin" text="Login" />
+    <Button layoutX="225.0" layoutY="212.0" onAction="#goToRegister" text="Register" />
 
 </AnchorPane>

@@ -11,6 +11,7 @@ module com.example.uas {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+
 //    requires mysql.connector.java;
 
     opens com.example.uas.controller to javafx.fxml;
