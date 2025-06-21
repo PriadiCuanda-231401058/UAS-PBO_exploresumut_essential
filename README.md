@@ -237,15 +237,15 @@ Database: `exploresumut`
 
 ## 👥 Tim Pengembang
 
-| Nama                     | NIM        | Kontribusi                          |
-|--------------------------|------------|-------------------------------------|
-| Priadi Cuanda            | 231401058  | Fitur login/register                |
-| Timothy Tanawi           | 231401079  | [Deskripsi kontribusi]              |
-| Josh Pardosi             | 231401031  | [Deskripsi kontribusi]              |
-| Azlinsyah Fadhilah Meran | 231401013  | Dokumentasi & pelengkap fitur       |
+| Nama                     | NIM        |
+|--------------------------|------------|
+| Priadi Cuanda            | 231401058  |
+| Timothy Tanawi           | 231401079  | 
+| Josh Pardosi             | 231401031  | 
+| Azlinsyah Fadhilah Meran | 231401013  | 
 
 ---
-## 📝 TODO/Future Improvements
+## 📝 Future Improvements
 
 - [ ] Implementasi halaman admin
 - [ ] Upload gambar wisata
