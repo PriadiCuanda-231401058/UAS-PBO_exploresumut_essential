@@ -46,33 +46,7 @@
 - MySQL Connector untuk database
 - ControlsFX untuk komponen UI tambahan
 
-### 📁 Struktur Direktori
-```
-exploresumut/
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/
-│       │       └── example/
-│       │           └── uas/
-│       │               ├── controller/     # Controller untuk UI
-│       │               ├── DAO/            # Data Access Object
-│       │               ├── database/       # Konfigurasi database
-│       │               ├── model/          # Model data
-│       │               └── util/           # Utility classes
-│       └── resources/
-│           └── com/
-│               └── example/
-│                   └── uas/
-│                       ├── css/            # Stylesheet
-│                       ├── images/         # Gambar dan icon
-│                       └── view/           # File FXML untuk UI
-├── target/              # Output build
-├── pom.xml             # Konfigurasi Maven
-└── README.md           # Dokumentasi ini
-```
-
-## 🔧 Teknologi yang Digunakan
+##  Teknologi yang Digunakan
 
 - **Java 23** - Bahasa pemrograman utama
 - **JavaFX 17.0.6** - Framework UI
@@ -217,10 +191,10 @@ exploresumut/
 
 1. Buka melalui IntelliJ
 2. Pastikan Java dan Maven sudah terinstall.
-3. Download file jar yang dibutuhkan Bcrypt dan mySQL.
-4. Masukan file tersebut kedalam dependencies melalui Project Structures.
-5. Pastikan memiliki file ca.pem atau keystore.jks yang akan digunakan untuk validasi kredensial ke database.
-6. Pilih run dari file MainApplication.java.
+3. Download file-file yang dibutuhkan, tersedia di dalam folder "Download this files".
+4. Masukkan file-file .jar ke dalam dependencies melalui Files -> Project Structures -> Modules -> tanda (+).
+5. Masukkan file keystore.jks yang akan digunakan ke folder D:\ untuk validasi kredensial ke database.
+6. Pilih run dari file MainApp.java.
 ---
 
 ## 🗃️ Struktur Database
@@ -243,14 +217,3 @@ Database: `exploresumut`
 | Timothy Tanawi           | 231401079  | 
 | Josh Pardosi             | 231401031  | 
 | Azlinsyah Fadhilah Meran | 231401013  | 
-
----
-## 📝 Future Improvements
-
-- [ ] Implementasi halaman admin
-- [ ] Upload gambar wisata
-- [ ] Sistem booking wisata
-- [ ] Peta lokasi wisata
-- [ ] Notifikasi real-time
-- [ ] Export data ke PDF/Excel
-- [ ] Multi-language support
