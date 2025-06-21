@@ -1,7 +1,7 @@
   
 # 🌄 Explore Sumut — Aplikasi Wisata Sumatera Utara
 
-**Explore Sumut** adalah aplikasi berbasis Java yang dikembangkan untuk tugas akhir mata kuliah *Pemrograman Berorientasi Objek (PBO)*. Aplikasi ini membantu pengguna menjelajahi informasi seputar tempat wisata di Sumatera Utara.
+**Explore Sumut** adalah aplikasi berbasis Java yang dikembangkan untuk tugas akhir mata kuliah *Laboratoriam Praktikum Pemrograman Berorientasi Objek (PBO)*. Aplikasi ini membantu pengguna menjelajahi informasi seputar tempat wisata di Sumatera Utara.
 
 ---
 
