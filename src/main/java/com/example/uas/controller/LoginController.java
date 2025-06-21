@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import com.example.uas.database.DBConnection;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
@@ -23,24 +24,25 @@ public class LoginController {
         String password = passwordField.getText();
 
         try (Connection conn = DBConnection.connect();) {
-            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM users WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
-            stmt.setString(2, password); // Belum hash
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // Berhasil login
-                int userId = rs.getInt("id");
-                String role = rs.getString("role");
-                UserSession.createSession(username, userId, role);
-                helper.moveTo(usernameField, "/com/example/uas/view/dashboard.fxml");
+                String storedHash = rs.getString("password");
+                if (BCrypt.checkpw(password, storedHash)) {
+                    int userId = rs.getInt("id");
+                    String role = rs.getString("role");
+                    UserSession.createSession(username, userId, role);
+                    helper.moveTo(usernameField, "/com/example/uas/hello-view.fxml");
 //                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/uas/view/dashboard.fxml"));
 //                Scene scene = new Scene(loader.load());
 //                Stage stage = (Stage) usernameField.getScene().getWindow();
 //                stage.setScene(scene);
-            } else {
-                showAlert("Login gagal", "Username atau password salah");
+                }else showAlert("Login gagal", "Password salah");
+            }else {
+                showAlert("Login gagal", "Username tidak ditemukan");
             }
         } catch (Exception e) {
             e.printStackTrace();

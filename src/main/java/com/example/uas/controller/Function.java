@@ -15,7 +15,8 @@ public class Function {
 
             Stage stage = (Stage) node.getScene().getWindow();
             stage.setScene(scene);
-            stage.setFullScreen(true);
+//            stage.setFullScreen(true);
+            stage.setMaximized(true);
             stage.show();
 
         } catch (IOException e) {
