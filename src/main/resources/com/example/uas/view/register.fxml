@@ -1,40 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.paint.Color?>
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uas.controller.RegisterController">
 
-<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <AnchorPane prefHeight="75.0" prefWidth="100.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
+   <left>
+      <AnchorPane prefHeight="720.0" prefWidth="640.0" style="-fx-background-color: linear-gradient(to bottom, #0099ff, #33ccff, #66ffcc);" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="#1e1f20" layoutX="150.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Regristation ">
+            <Label layoutX="265.0" layoutY="223.0" scaleX="3.0" scaleY="3.0" text="🌍">
                <font>
-                  <Font size="18.0" />
+                  <Font size="90.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.4225092462068114" centerY="0.6041009463722398" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.022200563922524452" green="0.08860371261835098" blue="0.17543859779834747" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color red="0.022200563922524452" green="0.08860371261835098" blue="0.17543859779834747" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <Text fill="WHITE" layoutX="122.0" layoutY="479.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="10.0" text="ExploreSumut">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="61.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-   </top>
-   <left>
-      <AnchorPane prefHeight="290.0" prefWidth="701.0" BorderPane.alignment="CENTER">
+   </left>
+   <right>
+      <AnchorPane prefHeight="720.0" prefWidth="640.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="151.0" layoutY="48.0" prefHeight="25.0" prefWidth="400.0" />
-            <TextField layoutX="151.0" layoutY="106.0" prefHeight="25.0" prefWidth="400.0" />
-            <TextField layoutX="151.0" layoutY="171.0" prefHeight="25.0" prefWidth="400.0" />
-            <TextField layoutX="151.0" layoutY="231.0" prefHeight="25.0" prefWidth="400.0" />
-            <TextField layoutX="151.0" layoutY="291.0" prefHeight="25.0" prefWidth="400.0" />
-            <Text layoutX="151.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname" />
-            <Text layoutX="151.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname" />
-            <Text layoutX="153.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-            <Text layoutX="155.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-            <Text layoutX="153.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password" />
-            <Button layoutX="151.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="400.0" style="-fx-background-color: #0598ff;" text="Register" />
+            <Group layoutX="232.0" layoutY="225.0" scaleX="1.5" scaleY="1.5">
+               <children>
+                  <Group>
+                     <children>
+                        <Label layoutX="94.0" layoutY="-10.0" text="👥">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Label>
+
+                        <Text layoutX="82.0" layoutY="67.8134765625" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+
+                        <Label layoutY="96.0" text="👤">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+
+                        <TextField fx:id="usernameField" layoutX="35.0" layoutY="94.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0 0 2 0;" />
+
+                        <Label layoutY="146.0" text="🔑">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+
+                        <PasswordField fx:id="passwordField" layoutX="35.0" layoutY="144.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0 0 2 0;" />
+
+                        <Button layoutX="68.0" layoutY="204.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #0598ff; -fx-background-radius: 100;" text="Register" textFill="WHITE" />
+
+                        <Text fill="#535556" layoutX="45.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?" />
+                     </children>
+                  </Group>
+
+                  <Hyperlink layoutX="95.0" layoutY="267.0" onAction="#goToLogin" text="Login" />
+               </children>
+            </Group>
          </children>
       </AnchorPane>
-   </left>
+   </right>
+
 </BorderPane>
