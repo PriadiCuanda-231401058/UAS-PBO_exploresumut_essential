@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to bottom right, #b2f0ff, #a1c4fd);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uas.controller.HomeController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to bottom, #0099ff, #33ccff, #66ffcc);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.uas.controller.HomeController">
 
     <children>
 
@@ -16,7 +16,7 @@
         <VBox alignment="CENTER" spacing="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
 
         <!-- Gambar Wisata -->
-        <ImageView fitHeight="200.0" fitWidth="400.0" layoutX="486.0" layoutY="149.66666666666666" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="486.0" AnchorPane.topAnchor="149.66666666666666">
+        <ImageView fitHeight="200.0" fitWidth="400.0" layoutX="552.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="552.0" AnchorPane.topAnchor="147.0">
             <image>
                 <Image url="@../images/sumut-icon.png" />
             </image>
