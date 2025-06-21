@@ -2,6 +2,7 @@ package com.example.uas.controller;
 
 //package controller;
 
+import com.example.uas.model.User;
 import com.example.uas.model.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -34,8 +35,10 @@ public class LoginController {
                 if (BCrypt.checkpw(password, storedHash)) {
                     int userId = rs.getInt("id");
                     String role = rs.getString("role");
+                    User.setLoggedInUsername(username);
                     UserSession.createSession(username, userId, role);
-                    helper.moveTo(usernameField, "/com/example/uas/hello-view.fxml");
+
+                    helper.moveTo(usernameField, "/com/example/uas/view/dashboard.fxml");
 //                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/uas/view/dashboard.fxml"));
 //                Scene scene = new Scene(loader.load());
 //                Stage stage = (Stage) usernameField.getScene().getWindow();

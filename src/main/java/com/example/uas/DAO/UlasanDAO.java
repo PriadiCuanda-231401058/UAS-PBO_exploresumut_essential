@@ -86,4 +86,22 @@ public class UlasanDAO {
         }
         return count == 0 ? 0 : total / count;
     }
+    public int getMaxId() {
+        int maxId = -1;
+        String query = "SELECT MAX(id) AS max_id FROM review";
+
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement statement = conn.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet.next()) {
+                maxId = resultSet.getInt("max_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return maxId;
+    }
 }
