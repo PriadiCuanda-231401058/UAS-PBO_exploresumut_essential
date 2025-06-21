@@ -63,15 +63,15 @@ public class WisataDAO {
         List<Object> params = new ArrayList<>();
 
         if (nameFilter != null && !nameFilter.isBlank()) {
-            sql.append("AND LOWER(name) LIKE ? ");
+            sql.append("AND LOWER(nama) LIKE ? ");
             params.add("%" + nameFilter.toLowerCase() + "%");
         }
         if (categoryFilter != null && !categoryFilter.isBlank()) {
-            sql.append("AND LOWER(category) = ? ");
+            sql.append("AND LOWER(kategori) = ? ");
             params.add(categoryFilter.toLowerCase());
         }
         if (locationFilter != null && !locationFilter.isBlank()) {
-            sql.append("AND LOWER(location) LIKE ? ");
+            sql.append("AND LOWER(lokasi) LIKE ? ");
             params.add("%" + locationFilter.toLowerCase() + "%");
         }
         sql.append("ORDER BY id DESC");

@@ -4,6 +4,8 @@ import com.example.uas.DAO.UlasanDAO;
 import com.example.uas.DAO.WisataDAO;
 import com.example.uas.model.Ulasan;
 import com.example.uas.model.TempatWisata;
+import com.example.uas.model.User;
+import com.example.uas.model.UserSession;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,13 +28,14 @@ public class DetailController {
     @FXML private ImageView imageGallery;
 
     @FXML private ListView<Ulasan> reviewListView;
-    @FXML private TextField nameField;
     @FXML private ComboBox<Integer> ratingComboBox;
     @FXML private TextArea commentArea;
 
     private int wisataId;
     private WisataDAO wisataDAO = new WisataDAO();
     private UlasanDAO reviewDAO = new UlasanDAO();
+    private final User user = new User();
+
 
     @FXML
     private void initialize() {
@@ -43,6 +46,8 @@ public class DetailController {
     /**
      * Set Wisata Id and load detail data.
      */
+
+
     public void setWisataId(int id) {
         this.wisataId = id;
         loadWisataDetail();
@@ -97,15 +102,10 @@ public class DetailController {
 
     @FXML
     private void onSubmitReview() {
-        String userName = nameField.getText();
-        Integer rating = ratingComboBox.getValue();
+        int rating = ratingComboBox.getValue();
         String comment = commentArea.getText();
 
-        if (userName == null || userName.isBlank()) {
-            showAlert("Validasi", "Nama harus diisi.");
-            return;
-        }
-        if (rating == null) {
+        if (rating == 0) {
             showAlert("Validasi", "Rating harus dipilih.");
             return;
         }
@@ -115,8 +115,10 @@ public class DetailController {
         }
 
         Ulasan review = new Ulasan();
+
+        review.setId(reviewDAO.getMaxId());
         review.setWisataId(wisataId);
-        review.setUserName(userName);
+        review.setUserName(user.getLoggedInUsername());
         review.setRating(rating);
         review.setComment(comment);
 
@@ -131,7 +133,6 @@ public class DetailController {
     }
 
     private void clearReviewForm() {
-        nameField.clear();
         ratingComboBox.getSelectionModel().clearSelection();
         commentArea.clear();
     }

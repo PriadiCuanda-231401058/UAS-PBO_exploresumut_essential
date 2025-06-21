@@ -2,16 +2,21 @@ package com.example.uas.controller;
 
 //package controller;
 
+import com.example.uas.model.User;
+import com.example.uas.model.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import com.example.uas.controller.DetailController;
 import com.example.uas.database.DBConnection;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class LoginController {
+    Function helper = new Function();
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
 
@@ -29,26 +34,27 @@ public class LoginController {
 
             if (rs.next()) {
                 // Berhasil login
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboard.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                stage.setScene(scene);
+                int userId = rs.getInt("id");
+                String role = rs.getString("role");
+                User.setLoggedInUsername(username);
+                UserSession.createSession(username, userId, role);
+
+
+                helper.moveTo(usernameField, "/com/example/uas/view/dashboard.fxml");
+
             } else {
                 showAlert("Login gagal", "Username atau password salah");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Terjadi kesalahan koneksi");
+            showAlert("Error",e.getMessage());
         }
     }
 
     @FXML
     private void goToRegister() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/register.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(scene);
+            helper.moveTo(usernameField, "/com/example/uas/view/register.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,5 +66,6 @@ public class LoginController {
         alert.setContentText(msg);
         alert.show();
     }
+
 }
 

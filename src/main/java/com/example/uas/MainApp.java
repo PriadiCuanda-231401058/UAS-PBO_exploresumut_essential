@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -16,6 +18,17 @@ public class MainApp extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("ExploreSumut");
         stage.setScene(scene);
+        // Cara 1: Fullscreen (tanpa border, taskbar hilang)
+//        stage.setFullScreen(true);
+        stage.setMaximized(true);
+
+        // Cara 2: Maximized (seperti mode biasa tapi layar penuh)
+//        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+//        stage.setX(0);
+//        stage.setY(0);
+//        stage.setWidth(screenBounds.getWidth());
+//        stage.setHeight(screenBounds.getHeight());
+
         stage.show();
     }
 
@@ -31,7 +44,7 @@ public class MainApp extends Application {
 //                "&requireSSL=true" +
 //                "&verifyServerCertificate=true" +
 //                "&trustCertificateKeyStoreUrl=file:D:\\keystore.jks" +
-//                "&trustCertificateKeyStorePassword=p.b.o."; // ganti dengan nama database kamu
+//                "&trustCertificateKeyStorePassword=qwerty"; // ganti dengan nama database kamu
 //        String user = "avnadmin"; // ganti jika bukan root
 //        String password = "AVNS_LXE4QR_L36QEuXPf9J_"; // isi jika ada password MySQL-mu
 //

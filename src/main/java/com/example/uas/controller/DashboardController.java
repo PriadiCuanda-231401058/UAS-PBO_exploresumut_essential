@@ -33,6 +33,8 @@ public class DashboardController {
 
     private WisataDAO wisataDAO;
     UlasanDAO reviewDAO = new UlasanDAO();
+    
+
 
     @FXML
     private void initialize() {
@@ -117,7 +119,7 @@ public class DashboardController {
 
     private void openDetailPage(TempatWisata wisata) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/detail.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/uas/view/detail.fxml"));
             Parent root = loader.load();
 
             DetailController controller = loader.getController();
@@ -125,7 +127,8 @@ public class DashboardController {
 
             Stage stage = new Stage();
             stage.setTitle("Detail Wisata: " + wisata.getName());
-            stage.setScene(new Scene(root, 700, 500));
+            stage.setScene(new Scene(root));
+            stage.setFullScreen(true);
             stage.show();
 
         } catch (IOException e) {
